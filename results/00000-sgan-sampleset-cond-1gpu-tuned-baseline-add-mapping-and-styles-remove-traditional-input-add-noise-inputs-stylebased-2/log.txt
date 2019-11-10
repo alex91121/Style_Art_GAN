@@ -1,0 +1,148 @@
+dnnlib: Running training.training_loop.training_loop() on localhost...
+Streaming data using training.dataset.TFRecordDataset...
+Dataset shape = [3, 256, 256]
+Dynamic range = [0, 255]
+Label size    = 4
+Constructing networks...
+
+G                             Params    OutputShape         WeightShape     
+---                           ---       ---                 ---             
+latents_in                    -         (?, 512)            -               
+labels_in                     -         (?, 4)              -               
+lod                           -         ()                  -               
+dlatent_avg                   -         (512,)              -               
+G_mapping/latents_in          -         (?, 512)            -               
+G_mapping/labels_in           -         (?, 4)              -               
+G_mapping/LabelConcat         2048      (?, 1024)           (4, 512)        
+G_mapping/PixelNorm           -         (?, 1024)           -               
+G_mapping/Dense0              524800    (?, 512)            (1024, 512)     
+G_mapping/Dense1              262656    (?, 512)            (512, 512)      
+G_mapping/Broadcast           -         (?, 1, 512)         -               
+G_mapping/dlatents_out        -         (?, 1, 512)         -               
+G_synthesis/dlatents_in       -         (?, 1, 512)         -               
+G_synthesis/4x4/Dense         4194816   (?, 512, 4, 4)      (512, 8192)     
+G_synthesis/4x4/Conv          2359808   (?, 512, 4, 4)      (3, 3, 512, 512)
+G_synthesis/ToRGB_lod6        1539      (?, 3, 4, 4)        (1, 1, 512, 3)  
+G_synthesis/8x8/Conv0_up      2359808   (?, 512, 8, 8)      (3, 3, 512, 512)
+G_synthesis/8x8/Conv1         2359808   (?, 512, 8, 8)      (3, 3, 512, 512)
+G_synthesis/ToRGB_lod5        1539      (?, 3, 8, 8)        (1, 1, 512, 3)  
+G_synthesis/Upscale2D         -         (?, 3, 8, 8)        -               
+G_synthesis/Grow_lod5         -         (?, 3, 8, 8)        -               
+G_synthesis/16x16/Conv0_up    2359808   (?, 512, 16, 16)    (3, 3, 512, 512)
+G_synthesis/16x16/Conv1       2359808   (?, 512, 16, 16)    (3, 3, 512, 512)
+G_synthesis/ToRGB_lod4        1539      (?, 3, 16, 16)      (1, 1, 512, 3)  
+G_synthesis/Upscale2D_1       -         (?, 3, 16, 16)      -               
+G_synthesis/Grow_lod4         -         (?, 3, 16, 16)      -               
+G_synthesis/32x32/Conv0_up    2359808   (?, 512, 32, 32)    (3, 3, 512, 512)
+G_synthesis/32x32/Conv1       2359808   (?, 512, 32, 32)    (3, 3, 512, 512)
+G_synthesis/ToRGB_lod3        1539      (?, 3, 32, 32)      (1, 1, 512, 3)  
+G_synthesis/Upscale2D_2       -         (?, 3, 32, 32)      -               
+G_synthesis/Grow_lod3         -         (?, 3, 32, 32)      -               
+G_synthesis/64x64/Conv0_up    1179904   (?, 256, 64, 64)    (3, 3, 512, 256)
+G_synthesis/64x64/Conv1       590080    (?, 256, 64, 64)    (3, 3, 256, 256)
+G_synthesis/ToRGB_lod2        771       (?, 3, 64, 64)      (1, 1, 256, 3)  
+G_synthesis/Upscale2D_3       -         (?, 3, 64, 64)      -               
+G_synthesis/Grow_lod2         -         (?, 3, 64, 64)      -               
+G_synthesis/128x128/Conv0_up  295040    (?, 128, 128, 128)  (3, 3, 256, 128)
+G_synthesis/128x128/Conv1     147584    (?, 128, 128, 128)  (3, 3, 128, 128)
+G_synthesis/ToRGB_lod1        387       (?, 3, 128, 128)    (1, 1, 128, 3)  
+G_synthesis/Upscale2D_4       -         (?, 3, 128, 128)    -               
+G_synthesis/Grow_lod1         -         (?, 3, 128, 128)    -               
+G_synthesis/256x256/Conv0_up  73792     (?, 64, 256, 256)   (3, 3, 128, 64) 
+G_synthesis/256x256/Conv1     36928     (?, 64, 256, 256)   (3, 3, 64, 64)  
+G_synthesis/ToRGB_lod0        195       (?, 3, 256, 256)    (1, 1, 64, 3)   
+G_synthesis/Upscale2D_5       -         (?, 3, 256, 256)    -               
+G_synthesis/Grow_lod0         -         (?, 3, 256, 256)    -               
+G_synthesis/images_out        -         (?, 3, 256, 256)    -               
+G_synthesis/lod               -         ()                  -               
+images_out                    -         (?, 3, 256, 256)    -               
+---                           ---       ---                 ---             
+Total                         23833813                                      
+
+
+D                    Params    OutputShape         WeightShape     
+---                  ---       ---                 ---             
+images_in            -         (?, 3, 256, 256)    -               
+labels_in            -         (?, 4)              -               
+lod                  -         ()                  -               
+FromRGB_lod0         256       (?, 64, 256, 256)   (1, 1, 3, 64)   
+256x256/Conv0        36928     (?, 64, 256, 256)   (3, 3, 64, 64)  
+256x256/Conv1_down   73856     (?, 128, 128, 128)  (3, 3, 64, 128) 
+Downscale2D          -         (?, 3, 128, 128)    -               
+FromRGB_lod1         512       (?, 128, 128, 128)  (1, 1, 3, 128)  
+Grow_lod0            -         (?, 128, 128, 128)  -               
+128x128/Conv0        147584    (?, 128, 128, 128)  (3, 3, 128, 128)
+128x128/Conv1_down   295168    (?, 256, 64, 64)    (3, 3, 128, 256)
+Downscale2D_1        -         (?, 3, 64, 64)      -               
+FromRGB_lod2         1024      (?, 256, 64, 64)    (1, 1, 3, 256)  
+Grow_lod1            -         (?, 256, 64, 64)    -               
+64x64/Conv0          590080    (?, 256, 64, 64)    (3, 3, 256, 256)
+64x64/Conv1_down     1180160   (?, 512, 32, 32)    (3, 3, 256, 512)
+Downscale2D_2        -         (?, 3, 32, 32)      -               
+FromRGB_lod3         2048      (?, 512, 32, 32)    (1, 1, 3, 512)  
+Grow_lod2            -         (?, 512, 32, 32)    -               
+32x32/Conv0          2359808   (?, 512, 32, 32)    (3, 3, 512, 512)
+32x32/Conv1_down     2359808   (?, 512, 16, 16)    (3, 3, 512, 512)
+Downscale2D_3        -         (?, 3, 16, 16)      -               
+FromRGB_lod4         2048      (?, 512, 16, 16)    (1, 1, 3, 512)  
+Grow_lod3            -         (?, 512, 16, 16)    -               
+16x16/Conv0          2359808   (?, 512, 16, 16)    (3, 3, 512, 512)
+16x16/Conv1_down     2359808   (?, 512, 8, 8)      (3, 3, 512, 512)
+Downscale2D_4        -         (?, 3, 8, 8)        -               
+FromRGB_lod5         2048      (?, 512, 8, 8)      (1, 1, 3, 512)  
+Grow_lod4            -         (?, 512, 8, 8)      -               
+8x8/Conv0            2359808   (?, 512, 8, 8)      (3, 3, 512, 512)
+8x8/Conv1_down       2359808   (?, 512, 4, 4)      (3, 3, 512, 512)
+Downscale2D_5        -         (?, 3, 4, 4)        -               
+FromRGB_lod6         2048      (?, 512, 4, 4)      (1, 1, 3, 512)  
+Grow_lod5            -         (?, 512, 4, 4)      -               
+4x4/MinibatchStddev  -         (?, 513, 4, 4)      -               
+4x4/Conv             2364416   (?, 512, 4, 4)      (3, 3, 513, 512)
+4x4/Dense0           4194816   (?, 512)            (8192, 512)     
+4x4/Dense1           2052      (?, 4)              (512, 4)        
+LabelSwitch          -         (?, 1)              -               
+scores_out           -         (?, 1)              -               
+---                  ---       ---                 ---             
+Total                23053892                                      
+
+Building TensorFlow graph...
+Setting up snapshot image grid...
+Setting up run dir...
+Traceback (most recent call last):
+  File "train.py", line 193, in <module>
+    main()
+  File "train.py", line 188, in main
+    dnnlib.submit_run(**kwargs)
+  File "C:\Users\joshu\Documents\Columbia\COMS 4995 Deep Learning\stylegan-master\dnnlib\submission\submit.py", line 290, in submit_run
+    run_wrapper(submit_config)
+  File "C:\Users\joshu\Documents\Columbia\COMS 4995 Deep Learning\stylegan-master\dnnlib\submission\submit.py", line 242, in run_wrapper
+    util.call_func_by_name(func_name=submit_config.run_func_name, submit_config=submit_config, **submit_config.run_func_kwargs)
+  File "C:\Users\joshu\Documents\Columbia\COMS 4995 Deep Learning\stylegan-master\dnnlib\util.py", line 257, in call_func_by_name
+    return func_obj(*args, **kwargs)
+  File "C:\Users\joshu\Documents\Columbia\COMS 4995 Deep Learning\stylegan-master\training\training_loop.py", line 207, in training_loop
+    metrics = metric_base.MetricGroup(metric_arg_list)
+  File "C:\Users\joshu\Documents\Columbia\COMS 4995 Deep Learning\stylegan-master\metrics\metric_base.py", line 121, in __init__
+    self.metrics = [dnnlib.util.call_func_by_name(**kwargs) for kwargs in metric_kwarg_list]
+  File "C:\Users\joshu\Documents\Columbia\COMS 4995 Deep Learning\stylegan-master\metrics\metric_base.py", line 121, in <listcomp>
+    self.metrics = [dnnlib.util.call_func_by_name(**kwargs) for kwargs in metric_kwarg_list]
+  File "C:\Users\joshu\Documents\Columbia\COMS 4995 Deep Learning\stylegan-master\dnnlib\util.py", line 255, in call_func_by_name
+    func_obj = get_obj_by_name(func_name)
+  File "C:\Users\joshu\Documents\Columbia\COMS 4995 Deep Learning\stylegan-master\dnnlib\util.py", line 248, in get_obj_by_name
+    module, obj_name = get_module_from_obj_name(name)
+  File "C:\Users\joshu\Documents\Columbia\COMS 4995 Deep Learning\stylegan-master\dnnlib\util.py", line 219, in get_module_from_obj_name
+    importlib.import_module(module_name) # may raise ImportError
+  File "C:\Users\joshu\Anaconda3\envs\stylegan\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 941, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 994, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 678, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "C:\Users\joshu\Documents\Columbia\COMS 4995 Deep Learning\stylegan-master\metrics\frechet_inception_distance.py", line 12, in <module>
+    import scipy
+ModuleNotFoundError: No module named 'scipy'
